@@ -36,7 +36,7 @@ class APICalling1 extends StatelessWidget {
                       vertical: 15,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.purple .shade50,
+                      color: Colors.purple.shade50,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Column(
