@@ -88,7 +88,7 @@ class API6UI extends StatelessWidget {
                           color: Colors.purple.shade100,
                           border: Border.all(
                             color: Colors.purple.shade400,
-                            width: 0.25,
+                            width: 0.35,
                           ),
                         ),
                         child: Column(
