@@ -14,6 +14,7 @@ class ServiceProvider extends ChangeNotifier {
       success: false,
     );
     try {
+
       isLoadingForService = true;
       notifyListeners();
       Response response = await dio.get(
@@ -31,6 +32,8 @@ class ServiceProvider extends ChangeNotifier {
         responseClass.success = true;
         responseClass.message = response.data['msg'];
         responseClass.data = List<ServiceClass>.from(response.data['data'].map((e)=> ServiceClass.fromJson(e)));
+
+
         isLoadingForService = false;
         notifyListeners();
         return responseClass;
