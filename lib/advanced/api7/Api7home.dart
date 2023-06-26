@@ -1,5 +1,4 @@
-
-
+import 'package:apicalling/advanced/api7/service_class.dart';
 import 'package:apicalling/advanced/api7/sevice_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,14 +13,14 @@ class Api7Home extends StatefulWidget {
 }
 
 class _Api7HomeState extends State<Api7Home> {
-  List<Map<String, dynamic>>? services;
+  List<ServiceClass>? services;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<ServiceProvider>().readSevice().then((value) {
         if (value.success && value.data != null) {
-          services = List<Map<String, dynamic>>.from(value.data);
+          services = value.data;
           setState(() {});
         }
       });
@@ -39,8 +38,10 @@ class _Api7HomeState extends State<Api7Home> {
       body: provider.isLoadingForService
           ? CircularProgressIndicator()
           : services != null
-              ? Api7Ui(services: services!,)
-              : Text("skhdg"),
+              ? Api7Ui(
+                  services: services!,
+                )
+              : Text("Something Went Wrong"),
     );
   }
 }

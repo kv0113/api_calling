@@ -1,3 +1,4 @@
+import 'package:apicalling/advanced/api7/service_class.dart';
 import 'package:apicalling/advanced/responceclass.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,9 @@ class ServiceProvider extends ChangeNotifier {
   final dio = Dio();
   bool isLoadingForService = true;
 
-  Future<Responceclass> readSevice() async {
+  Future<Responceclass<List<ServiceClass>>> readSevice() async {
     const uri = "https://garage.logispire.in/api/service/garage/1";
-    Responceclass responseClass = Responceclass(
+    Responceclass<List<ServiceClass>> responseClass = Responceclass(
       message: "Api is calling",
       success: false,
     );
@@ -29,7 +30,7 @@ class ServiceProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         responseClass.success = true;
         responseClass.message = response.data['msg'];
-        responseClass.data = response.data['data'];
+        responseClass.data = List<ServiceClass>.from(response.data['data'].map((e)=> ServiceClass.fromJson(e)));
         isLoadingForService = false;
         notifyListeners();
         return responseClass;
